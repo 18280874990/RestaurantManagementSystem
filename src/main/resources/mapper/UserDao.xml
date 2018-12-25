@@ -4,4 +4,20 @@
 
 <mapper namespace="cn.edu.uestc.rms.dao.UserDao">
 
+    <select id="query" parameterType="java.lang.String" resultType="java.lang.String">
+        select password from user where account = #{account}
+    </select>
+
+    <insert id="createUser" parameterType="cn.edu.uestc.rms.model.User">
+        insert into user(
+                             account,
+                             password,
+                             people
+        )
+        values(
+               #{user.account},
+               #{user.password},
+               #{user.people}
+              )
+    </insert>
 </mapper>

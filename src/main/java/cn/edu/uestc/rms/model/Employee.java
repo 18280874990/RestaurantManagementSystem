@@ -1,10 +1,13 @@
 package cn.edu.uestc.rms.model;
 
+import lombok.Data;
+
+@Data
 public class Employee {
     private int employeeId;
-    private String employeeName;
-    private String employeeType;
-    private boolean employeeSex;
-    private double employeeSalary;
-    private String employeePhone;
+    private String name;
+    private String type;
+    private boolean sex;
+    private double salary;
+    private String phone;
 }

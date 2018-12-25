@@ -19,6 +19,6 @@ spring:
     url: jdbc:mysql://localhost:3306/rms?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: test
     password: password
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
