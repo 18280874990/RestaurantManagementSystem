@@ -2,16 +2,20 @@ package cn.edu.uestc.rms.model;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Order {
-    private int orderId;
-    private int menuId;
+    private Integer orderId;
+    private Integer foodId;
     private String account;
-    private int menuNum;
-    private String time;
-    private String type;
-    private int state;
-    private int mealCode;
+    private Integer menuNum;
+    private Double price;
+    private Date time;
+    private Boolean type;
+    private Integer state;
+    private Integer mealCode;
+    private Integer position;
     private String phone;
     private String addr;
 }

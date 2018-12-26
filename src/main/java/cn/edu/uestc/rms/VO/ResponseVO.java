@@ -8,13 +8,13 @@ public class ResponseVO<T> {
     private Boolean success;
     private String msg;
 
-    public ResponseVO<T> success(T data){
+    public ResponseVO<T> success(T data) {
         this.data = data;
         this.success = true;
         return this;
     }
 
-    public ResponseVO<T> fail(String msg){
+    public ResponseVO<T> fail(String msg) {
         this.msg = msg;
         this.success = false;
         return this;

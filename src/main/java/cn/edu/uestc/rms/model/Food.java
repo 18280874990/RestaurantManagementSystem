@@ -3,13 +3,12 @@ package cn.edu.uestc.rms.model;
 import lombok.Data;
 
 @Data
-public class Menu {
-    private int menuId;
+public class Food {
+    private Integer foodId;
     private String name;
-    private double price;
-    private int sales;
+    private String sizePrice;
+    private Integer sales;
     private String image;
     private String description;
     private String type;
-    private int employeeId;
 }
