@@ -5,18 +5,19 @@
 <mapper namespace="cn.edu.uestc.rms.dao.FoodDao">
     <insert id="createFood" parameterType="cn.edu.uestc.rms.model.Food">
         insert into food(name, sizePrice, image, description, type)
-        values (
-                #{food.name},
+        values (#{food.name},
                 #{food.sizePrice},
                 #{food.image},
                 #{food.description},
-                #{food.type}
-               )
+                #{food.type})
     </insert>
 
     <select id="query" parameterType="cn.edu.uestc.rms.query.FoodQuery" resultType="cn.edu.uestc.rms.model.Food">
         select * from food where
         1 = 1
+        <if test="query != null and query.foodId != null">
+            and food.foodId = #{query.foodId}
+        </if>
         <if test="query != null and query.name != null">
             and food.name = #{query.name}
         </if>
@@ -25,4 +26,10 @@
         </if>
         order by type, name
     </select>
+
+    <update id="updateFood" parameterType="cn.edu.uestc.rms.model.Food">
+        update food
+        set sales = sales + #{food.sales}
+        where foodId = #{food.foodId}
+    </update>
 </mapper>

@@ -5,19 +5,27 @@
 <mapper namespace="cn.edu.uestc.rms.dao.AccountDao">
 
     <select id="query" parameterType="java.lang.String" resultType="cn.edu.uestc.rms.model.Account">
-        select * from account where accountNum = #{accountNum}
+        select *
+        from account
+        where accountNum = #{accountNum}
     </select>
 
     <insert id="createAccount" parameterType="cn.edu.uestc.rms.model.Account">
         insert into account(
-                             accountNum,
-                             password,
-                             type
+        accountNum,
+        password,
+        type
+        <if test="account != null and account.employeeId != null">
+            ,employeeId
+        </if>
         )
         values(
-               #{account.accountNum},
-               #{account.password},
-               #{account.type}
-              )
+        #{account.accountNum},
+        #{account.password},
+        #{account.type}
+        <if test="account != null and account.employeeId != null">
+            ,#{account.employeeId}
+        </if>
+        )
     </insert>
 </mapper>
