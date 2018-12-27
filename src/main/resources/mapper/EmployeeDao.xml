@@ -4,4 +4,43 @@
 
 <mapper namespace="cn.edu.uestc.rms.dao.EmployeeDao">
 
+    <insert id="add" parameterType="cn.edu.uestc.rms.model.Employee" keyProperty="employee.employeeId" useGeneratedKeys="true">
+        insert into employee(name, type, sex, birth, salary, phone, workContent)
+        values (
+                #{employee.name},
+                #{employee.type},
+                #{employee.sex},
+                #{employee.birth},
+                #{employee.salary},
+                #{employee.phone},
+                #{employee.workContent})
+    </insert>
+
+    <update id="updateNum" parameterType="cn.edu.uestc.rms.model.Employee">
+        update employee
+        set num = #{employee.num}
+        where employeeId = #{employee.employeeId}
+    </update>
+
+    <select id="query" parameterType="cn.edu.uestc.rms.query.EmployeeQuery"
+            resultType="cn.edu.uestc.rms.model.Employee">
+        select * from employee where
+        1 = 1
+        <if test="query != null and query.employeeId != null">
+            and employeeId = #{query.employeeId}
+        </if>
+        <if test="query != null and query.type != null">
+            and type = #{query.type}
+        </if>
+        order by type, employeeId asc
+    </select>
+
+    <select id="queryMinNum" parameterType="cn.edu.uestc.rms.query.EmployeeQuery"
+            resultType="cn.edu.uestc.rms.model.Employee">
+        select *
+        from employee
+        where type = #{query.type}
+        order by num asc
+    </select>
+
 </mapper>

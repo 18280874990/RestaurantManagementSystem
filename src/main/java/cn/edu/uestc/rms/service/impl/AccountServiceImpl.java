@@ -4,7 +4,10 @@ import cn.edu.uestc.rms.Request.SignRequest;
 import cn.edu.uestc.rms.VO.SignInVO;
 import cn.edu.uestc.rms.VO.SignUpVO;
 import cn.edu.uestc.rms.dao.AccountDao;
+import cn.edu.uestc.rms.dao.EmployeeDao;
 import cn.edu.uestc.rms.model.Account;
+import cn.edu.uestc.rms.model.Employee;
+import cn.edu.uestc.rms.query.EmployeeQuery;
 import cn.edu.uestc.rms.service.AccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Resource
     private AccountDao accountDao;
+
+    @Resource
+    private EmployeeDao employeeDao;
 
     @Override
     public SignInVO signIn(SignRequest signRequest, HttpSession session) {
@@ -31,7 +37,15 @@ public class AccountServiceImpl implements AccountService {
         if(signRequest.getPassword().equals(account.getPassword())) {
             signInVO.setSuccess(true);
             signInVO.setType(account.getType());
-            session.setAttribute(account.getAccountNum(), account.getType());
+            if(account.getType().equals("employee")){
+                int employeeId = account.getEmployeeId();
+                EmployeeQuery query = new EmployeeQuery();
+                query.setEmployeeId(employeeId);
+                Employee employee = employeeDao.query(query).get(0);
+                signInVO.setAccountNum(accountNum);
+                signInVO.setType(employee.getType());
+            }
+            session.setAttribute(account.getAccountNum(), signInVO.getType());
         } else {
             signInVO.setSuccess(false);
             signInVO.setMsg("密码错误");
@@ -41,9 +55,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public SignUpVO register(SignRequest signRequest) {
+        return register(signRequest, "customer", null);
+    }
+
+    public SignUpVO register(SignRequest signRequest, String type, Integer employeeId){
         Account account = new Account();
         BeanUtils.copyProperties(signRequest, account);
-        account.setType("customer");
+        account.setType(type);
+        if(employeeId != null){
+            account.setEmployeeId(employeeId);
+        }
         SignUpVO signUpVO = new SignUpVO();
         if(accountDao.query(signRequest.getAccountNum()) != null){
             signUpVO.setSuccess(false);

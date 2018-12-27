@@ -1,6 +1,7 @@
 package cn.edu.uestc.rms.service.impl;
 
 import cn.edu.uestc.rms.Request.FoodRequest;
+import cn.edu.uestc.rms.VO.FoodVO;
 import cn.edu.uestc.rms.dao.FoodDao;
 import cn.edu.uestc.rms.model.Food;
 import cn.edu.uestc.rms.query.FoodQuery;
@@ -14,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -47,9 +50,17 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> list() {
+    public List<FoodVO> list() {
         FoodQuery query = new FoodQuery();
-        return foodDao.query(query);
+        List<Food> foods = foodDao.query(query);
+        List<FoodVO> foodVOS = new ArrayList<>();
+        for(Food food : foods){
+            FoodVO foodVO = new FoodVO();
+            BeanUtils.copyProperties(food, foodVO);
+            foodVO.setSizePrice(new Gson().fromJson(food.getSizePrice(), Map.class));
+            foodVOS.add(foodVO);
+        }
+        return foodVOS;
     }
 
     private String saveImage(MultipartFile multipartFile) {

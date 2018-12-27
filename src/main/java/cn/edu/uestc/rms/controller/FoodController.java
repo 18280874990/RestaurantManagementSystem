@@ -1,6 +1,7 @@
 package cn.edu.uestc.rms.controller;
 
 import cn.edu.uestc.rms.Request.FoodRequest;
+import cn.edu.uestc.rms.VO.FoodVO;
 import cn.edu.uestc.rms.VO.ResponseVO;
 import cn.edu.uestc.rms.model.Food;
 import cn.edu.uestc.rms.service.FoodService;
@@ -23,8 +24,8 @@ public class FoodController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    ResponseVO<List<Food>> list(FoodRequest foodRequest) {
-        return new ResponseVO<List<Food>>().success(foodService.list());
+    ResponseVO<List<FoodVO>> list(FoodRequest foodRequest) {
+        return new ResponseVO<List<FoodVO>>().success(foodService.list());
     }
 
     @RequestMapping(value = "check", method = RequestMethod.GET)

@@ -3,5 +3,73 @@
 
 
 <mapper namespace="cn.edu.uestc.rms.dao.OrderDao">
+    <select id="query" resultType="cn.edu.uestc.rms.model.Order" parameterType="cn.edu.uestc.rms.query.OrderQuery">
+        select * from rms_order where
+        1 = 1
+        <if test="query != null and query.orderId != null">
+            and orderId = #{query.orderId}
+        </if>
+        <if test="query != null and query.foodId != null">
+            and foodId = #{query.foodId}
+        </if>
+        <if test="query != null and query.accountNum != null">
+            and accountNum = #{query.accountNum}
+        </if>
+        <if test="query != null and query.type != null">
+            and type = #{query.type}
+        </if>
+        <if test="query != null and query.state != null">
+            and state = #{query.state}
+        </if>
+        <if test="query != null and query.cookId != null">
+            and cookId = #{query.cookId}
+        </if>
+        <if test="query != null and query.waiterId != null">
+            and waiterId = #{query.waiterId}
+        </if>
+        order by orderId, foodId desc
+    </select>
 
+    <select id="queryMaxOrderId" resultType="java.lang.Integer">
+        select max(orderId)
+        from rms_order
+    </select>
+
+    <insert id="createOrder" parameterType="cn.edu.uestc.rms.model.Order">
+        insert into rms_order(orderId,
+                              foodId,
+                              accountNum,
+                              foodNum,
+                              size,
+                              price,
+                              time,
+                              type,
+                              cookId,
+                              waiterId,
+                              mealCode,
+                              position,
+                              phone,
+                              addr)
+        values (#{order.orderId},
+                #{order.foodId},
+                #{order.accountNum},
+                #{order.foodNum},
+                #{order.size},
+                #{order.price},
+                now(),
+                #{order.type},
+                #{order.cookId},
+                #{order.waiterId},
+                #{order.mealCode},
+                #{order.position},
+                #{order.phone},
+                #{order.addr})
+    </insert>
+
+    <update id="updateState" parameterType="java.lang.Integer">
+        update rms_order
+        set state = #{order.state}
+        where orderId = #{order.orderId}
+          and foodId = #{order.foodId}
+    </update>
 </mapper>

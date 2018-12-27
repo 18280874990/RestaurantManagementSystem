@@ -8,12 +8,15 @@ import java.util.Date;
 public class Order {
     private Integer orderId;
     private Integer foodId;
-    private String account;
-    private Integer menuNum;
+    private String accountNum;
+    private Integer foodNum;
+    private String size;
     private Double price;
     private Date time;
     private Boolean type;
     private Integer state;
+    private Integer cookId;
+    private Integer waiterId;
     private Integer mealCode;
     private Integer position;
     private String phone;
