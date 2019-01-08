@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -22,8 +23,8 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseVO<OrderVO> create(@RequestBody List<OrderRequest> requests){
-        return new ResponseVO<OrderVO>().success(orderService.createOrders(requests));
+    public ResponseVO<OrderVO> create(@RequestBody List<OrderRequest> requests, HttpSession session){
+        return new ResponseVO<OrderVO>().success(orderService.createOrders(requests, session));
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
@@ -32,7 +33,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "confirm", method = RequestMethod.POST)
-    public ResponseVO<Boolean> confirm(@RequestBody OrderConfirmRequest orderConfirmRequest){
-        return new ResponseVO<Boolean>().success(orderService.confirm(orderConfirmRequest));
+    public ResponseVO<Boolean> confirm(@RequestBody OrderConfirmRequest orderConfirmRequest, HttpSession session){
+        return new ResponseVO<Boolean>().success(orderService.confirm(orderConfirmRequest, session));
     }
 }

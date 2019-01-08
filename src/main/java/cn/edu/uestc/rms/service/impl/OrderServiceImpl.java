@@ -18,9 +18,11 @@ import cn.edu.uestc.rms.query.OrderQuery;
 import cn.edu.uestc.rms.service.OrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,8 +54,9 @@ public class OrderServiceImpl implements OrderService {
     private AccountDao accountDao;
 
     @Override
-    public boolean confirm(OrderConfirmRequest orderConfirmRequest) {
-        Account account = accountDao.query(orderConfirmRequest.getAccountNum());
+    @Transactional
+    public boolean confirm(OrderConfirmRequest orderConfirmRequest, HttpSession session) {
+        Account account = accountDao.query((String)session.getAttribute("account"));
         OrderQuery orderQuery = new OrderQuery();
         orderQuery.setOrderId(orderConfirmRequest.getOrderId());
         orderQuery.setFoodId(orderConfirmRequest.getFoodId());
@@ -113,7 +116,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderVO createOrders(List<OrderRequest> orderRequests) {
+    @Transactional
+    public OrderVO createOrders(List<OrderRequest> orderRequests, HttpSession session) {
         if (CollectionUtils.isEmpty(orderRequests)) {
             return null;
         }
@@ -158,6 +162,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderRequest orderRequest : orderRequests) {
             Order order = new Order();
             BeanUtils.copyProperties(orderRequest, order);
+            order.setAccountNum((String)session.getAttribute("account"));
             order.setOrderId(maxOrderId);
             order.setCookId(cookId);
             order.setWaiterId(waiterId);

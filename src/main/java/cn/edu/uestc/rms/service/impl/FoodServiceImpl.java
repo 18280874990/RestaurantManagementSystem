@@ -9,6 +9,7 @@ import cn.edu.uestc.rms.service.FoodService;
 import com.google.gson.Gson;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +26,7 @@ public class FoodServiceImpl implements FoodService {
     @Resource
     private FoodDao foodDao;
 
+    @Transactional
     public boolean add(FoodRequest foodRequest) {
         if (checkFoodName(foodRequest.getName())) {
             String url = saveImage(foodRequest.getImage());
@@ -66,11 +68,11 @@ public class FoodServiceImpl implements FoodService {
     private String saveImage(MultipartFile multipartFile) {
         try {
             String fileName = System.currentTimeMillis() + multipartFile.getOriginalFilename();
-            String destFileName = "/Users/huangjiujie/IdeaProjects/RestaurantManagementSystem/src/main/resources/static/image"
-                    + File.separator + fileName;
+            new File("/Users/huangjiujie/rmsfile").mkdir();
+            String destFileName = "/Users/huangjiujie/rmsfile/" + fileName;
             File destFile = new File(destFileName);
             multipartFile.transferTo(destFile);
-            return "/static/image/" + fileName;
+            return "/image/" + fileName;
         } catch (IOException e) {
             return "";
         }

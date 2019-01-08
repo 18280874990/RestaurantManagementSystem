@@ -7,7 +7,7 @@ public class OrderRequest {
 
     private Integer foodId;
 
-    private String accountNum;
+    //private String accountNum;
 
     private Integer foodNum;
 

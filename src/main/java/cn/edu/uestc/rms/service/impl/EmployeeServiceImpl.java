@@ -7,6 +7,7 @@ import cn.edu.uestc.rms.model.Employee;
 import cn.edu.uestc.rms.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -23,6 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private AccountServiceImpl accountService;
 
     @Override
+    @Transactional
     public boolean createEmployee(EmployeeRequest employeeRequest) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeRequest, employee);

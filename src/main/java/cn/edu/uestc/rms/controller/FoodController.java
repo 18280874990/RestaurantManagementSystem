@@ -3,10 +3,11 @@ package cn.edu.uestc.rms.controller;
 import cn.edu.uestc.rms.Request.FoodRequest;
 import cn.edu.uestc.rms.VO.FoodVO;
 import cn.edu.uestc.rms.VO.ResponseVO;
-import cn.edu.uestc.rms.model.Food;
 import cn.edu.uestc.rms.service.FoodService;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -11,6 +11,7 @@ import cn.edu.uestc.rms.query.EmployeeQuery;
 import cn.edu.uestc.rms.service.AccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -45,7 +46,8 @@ public class AccountServiceImpl implements AccountService {
                 signInVO.setAccountNum(accountNum);
                 signInVO.setType(employee.getType());
             }
-            session.setAttribute(account.getAccountNum(), signInVO.getType());
+            session.setAttribute("account", account.getAccountNum());
+            session.setAttribute("type", signInVO.getType());
         } else {
             signInVO.setSuccess(false);
             signInVO.setMsg("密码错误");
@@ -54,6 +56,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public SignUpVO register(SignRequest signRequest) {
         return register(signRequest, "customer", null);
     }

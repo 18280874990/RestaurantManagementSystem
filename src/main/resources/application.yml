@@ -8,7 +8,6 @@ mybatis:
   typeAliasesPackage: com.edu.uestc.rms.model
   mapperLocations: classpath:mapper/*.xml
 
-
 ---
 
 #开发配置
