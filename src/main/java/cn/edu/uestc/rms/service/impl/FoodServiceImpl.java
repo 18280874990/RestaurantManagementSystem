@@ -68,8 +68,10 @@ public class FoodServiceImpl implements FoodService {
     private String saveImage(MultipartFile multipartFile) {
         try {
             String fileName = System.currentTimeMillis() + multipartFile.getOriginalFilename();
-            new File("/home/ubuntu/rmsfile").mkdir();
-            String destFileName = "/home/ubuntu/rmsfile/" + fileName;
+            String userHome = System.getProperties().getProperty("user.home");
+            System.out.println(userHome);
+            new File(userHome + "/rmsfile").mkdir();
+            String destFileName = userHome + "/rmsfile/" + fileName;
             File destFile = new File(destFileName);
             multipartFile.transferTo(destFile);
             return "/image/" + fileName;
