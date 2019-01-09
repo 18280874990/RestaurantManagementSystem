@@ -1,6 +1,6 @@
 #drop table feedback;
 #drop table revenue;
-drop table rms_order;
+#drop table rms_order;
 #drop table food;
 #drop table account;
 #drop table employee;
