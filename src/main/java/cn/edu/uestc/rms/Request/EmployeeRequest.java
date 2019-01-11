@@ -2,8 +2,6 @@ package cn.edu.uestc.rms.Request;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class EmployeeRequest {
     private String name;

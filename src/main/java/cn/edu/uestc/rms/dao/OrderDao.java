@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface OrderDao {
     List<Order> query(@Param("query") OrderQuery query);
+
     Integer queryMaxOrderId();
+
     int createOrder(@Param("order") Order order);
+
     int updateState(@Param("order") Order order);
 }

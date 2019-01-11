@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public boolean confirm(OrderConfirmRequest orderConfirmRequest, HttpSession session) {
-        Account account = accountDao.query((String)session.getAttribute("account"));
+        Account account = accountDao.query((String) session.getAttribute("account"));
         OrderQuery orderQuery = new OrderQuery();
         orderQuery.setOrderId(orderConfirmRequest.getOrderId());
         orderQuery.setFoodId(orderConfirmRequest.getFoodId());
@@ -162,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
         for (OrderRequest orderRequest : orderRequests) {
             Order order = new Order();
             BeanUtils.copyProperties(orderRequest, order);
-            order.setAccountNum((String)session.getAttribute("account"));
+            order.setAccountNum((String) session.getAttribute("account"));
             order.setOrderId(maxOrderId);
             order.setCookId(cookId);
             order.setWaiterId(waiterId);

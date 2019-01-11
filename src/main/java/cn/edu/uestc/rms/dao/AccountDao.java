@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface AccountDao {
     Account query(@Param("accountNum") String accountNum);
+
     int createAccount(@Param("account") Account account);
 }

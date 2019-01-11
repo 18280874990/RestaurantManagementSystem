@@ -18,7 +18,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseVO<Boolean> create(@RequestBody EmployeeRequest employeeRequest){
+    public ResponseVO<Boolean> create(@RequestBody EmployeeRequest employeeRequest) {
         return new ResponseVO<Boolean>().success(employeeService.createEmployee(employeeRequest));
     }
 }

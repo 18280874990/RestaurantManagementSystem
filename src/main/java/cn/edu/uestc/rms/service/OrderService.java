@@ -4,7 +4,6 @@ import cn.edu.uestc.rms.Request.OrderConfirmRequest;
 import cn.edu.uestc.rms.Request.OrderRequest;
 import cn.edu.uestc.rms.VO.OrderDetailVO;
 import cn.edu.uestc.rms.VO.OrderVO;
-import cn.edu.uestc.rms.model.Order;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

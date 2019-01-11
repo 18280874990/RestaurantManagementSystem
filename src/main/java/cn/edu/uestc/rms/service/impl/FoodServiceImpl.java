@@ -56,7 +56,7 @@ public class FoodServiceImpl implements FoodService {
         FoodQuery query = new FoodQuery();
         List<Food> foods = foodDao.query(query);
         List<FoodVO> foodVOS = new ArrayList<>();
-        for(Food food : foods){
+        for (Food food : foods) {
             FoodVO foodVO = new FoodVO();
             BeanUtils.copyProperties(food, foodVO);
             foodVO.setSizePrice(new Gson().fromJson(food.getSizePrice(), Map.class));

@@ -24,7 +24,7 @@ public class LoginInIntercepter implements HandlerInterceptor {
         if (session.getAttribute("account") != null) {
             String type = (String) session.getAttribute("type");
             String path = request.getServletPath();
-            if((type.equals("cook") || type.equals("waiter")) && (path.equals("/rms/order/confirm")))
+            if ((type.equals("cook") || type.equals("waiter")) && (path.equals("/rms/order/confirm")))
                 return true;
             return true;
         }

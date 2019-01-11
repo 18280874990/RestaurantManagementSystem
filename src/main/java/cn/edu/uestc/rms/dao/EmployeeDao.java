@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface EmployeeDao {
     int add(@Param("employee") Employee employee);
+
     int updateNum(@Param("employee") Employee employee);
+
     List<Employee> query(@Param("query") EmployeeQuery query);
+
     List<Employee> queryMinNum(@Param("query") EmployeeQuery query);
 }

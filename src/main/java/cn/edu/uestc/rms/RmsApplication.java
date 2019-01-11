@@ -1,6 +1,5 @@
 package cn.edu.uestc.rms;
 
-import javafx.application.Application;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,19 +14,19 @@ import javax.servlet.MultipartConfigElement;
 @MapperScan("cn.edu.uestc.rms.dao")
 public class RmsApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(RmsApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(RmsApplication.class);
+    }
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(RmsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RmsApplication.class, args);
+    }
 
-	@Bean
-	public MultipartConfigElement multipartConfigElement(){
-		MultipartConfigFactory factory = new MultipartConfigFactory();
-		return factory.createMultipartConfig();
-	}
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        return factory.createMultipartConfig();
+    }
 }

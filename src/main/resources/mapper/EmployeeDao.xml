@@ -4,10 +4,10 @@
 
 <mapper namespace="cn.edu.uestc.rms.dao.EmployeeDao">
 
-    <insert id="add" parameterType="cn.edu.uestc.rms.model.Employee" keyProperty="employee.employeeId" useGeneratedKeys="true">
+    <insert id="add" parameterType="cn.edu.uestc.rms.model.Employee" keyProperty="employee.employeeId"
+            useGeneratedKeys="true">
         insert into employee(name, type, sex, birth, salary, phone, workContent)
-        values (
-                #{employee.name},
+        values (#{employee.name},
                 #{employee.type},
                 #{employee.sex},
                 #{employee.birth},

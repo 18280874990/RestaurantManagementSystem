@@ -30,15 +30,15 @@ public class AccountServiceImpl implements AccountService {
         String accountNum = signRequest.getAccountNum();
         SignInVO signInVO = new SignInVO();
         Account account = accountDao.query(accountNum);
-        if(account == null){
+        if (account == null) {
             signInVO.setSuccess(false);
             signInVO.setMsg("账号不存在");
             return signInVO;
         }
-        if(signRequest.getPassword().equals(account.getPassword())) {
+        if (signRequest.getPassword().equals(account.getPassword())) {
             signInVO.setSuccess(true);
             signInVO.setType(account.getType());
-            if(account.getType().equals("employee")){
+            if (account.getType().equals("employee")) {
                 int employeeId = account.getEmployeeId();
                 EmployeeQuery query = new EmployeeQuery();
                 query.setEmployeeId(employeeId);
@@ -61,24 +61,22 @@ public class AccountServiceImpl implements AccountService {
         return register(signRequest, "customer", null);
     }
 
-    public SignUpVO register(SignRequest signRequest, String type, Integer employeeId){
+    public SignUpVO register(SignRequest signRequest, String type, Integer employeeId) {
         Account account = new Account();
         BeanUtils.copyProperties(signRequest, account);
         account.setType(type);
-        if(employeeId != null){
+        if (employeeId != null) {
             account.setEmployeeId(employeeId);
         }
         SignUpVO signUpVO = new SignUpVO();
-        if(accountDao.query(signRequest.getAccountNum()) != null){
+        if (accountDao.query(signRequest.getAccountNum()) != null) {
             signUpVO.setSuccess(false);
             signUpVO.setMsg("账号重复");
-        }
-        else {
+        } else {
             if (accountDao.createAccount(account) <= 0) {
                 signUpVO.setSuccess(false);
                 signUpVO.setMsg("注册失败");
-            }
-            else {
+            } else {
                 signUpVO.setSuccess(true);
                 signUpVO.setMsg("注册成功");
             }
